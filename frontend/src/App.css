@@ -1,0 +1,35 @@
+.formTarea{
+   display: flex;
+   justify-content: center;
+   padding-top: 50px;
+   padding-bottom: 50px;
+   background-color: blue;
+
+
+}
+
+.calendar-container{
+   background-color:brown;
+}
+
+/* Reduce el tamaño total del calendario */
+.calendar-container .react-calendar {
+   width: 250px; /* Ajusta el ancho del calendario */
+   font-size: 0.8em; /* Reduce el tamaño de la fuente en el calendario */
+ }
+ 
+ /* Ajusta el tamaño de los botones de navegación del calendario */
+ .calendar-container .react-calendar__navigation button {
+   min-width: 30px; /* Reduce el ancho de los botones */
+   font-size: 0.8em; /* Ajusta el tamaño de la fuente en los botones */
+ }
+ 
+ /* Ajusta el tamaño de las celdas de los días */
+ .calendar-container .react-calendar__tile {
+   padding: 5px; /* Reduce el relleno en las celdas de los días */
+ }
+ 
+ /* Ajusta el tamaño del encabezado del mes y año */
+ .calendar-container .react-calendar__month-view__weekdays {
+   font-size: 0.75em; /* Tamaño más pequeño para los nombres de los días de la semana */
+ }
