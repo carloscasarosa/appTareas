@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Container, Form, Col, Row } from 'react-bootstrap'
 import Calendar from 'react-calendar'
+import axios from 'axios'
 
 export default function BoxTareas() {
   const [calendario, setCalendario] = useState(false);
@@ -9,24 +10,37 @@ export default function BoxTareas() {
 
   function tomarNombre(e){
    setTarea(e.target.value);
+   
 
   }
 
   function tomarFecha(value){
     setFecha(value);
     setCalendario(false);
+
   }
 
   const mostrarCalendar = ()=>{
     setCalendario(true);
   } 
 
+  const nuevaTarea= async()=>{
+    const estado= "pendiente";
+      try{
+          // Convertir fecha a un formato de cadena si es Date
+           const fechaStr = fecha.toISOString().split('T')[0];
+           console.log(fechaStr);
+           const response= await axios.post("http://localhost:8000/", {
+            nombre_tarea: tarea,
+            fecha:fechaStr,
+            estado});
+           console.log('tarea enviada', response.data);
+           window.location.reload();
+      }catch (error){
+        console.log('error al enviar la tarea', error);
 
-  const nuevaTarea= ()=>{
-    
-     console.log(tarea, fecha);
-     setFecha('');
-     setTarea('');
+      }
+
   }
  
   return (
@@ -49,7 +63,7 @@ export default function BoxTareas() {
             <input placeholder='fecha' 
                   className='my-2 mr-3'
                   value={fecha ? fecha.toLocaleDateString() : ''}  //esto muestra la fecha seleccionada
-                  />
+                  readOnly/>
             <Button variant='info'onClick={mostrarCalendar} > fecha de la tarea</Button>
           </Col>
            { calendario && (
@@ -62,7 +76,7 @@ export default function BoxTareas() {
 
              </div>)}
         </Row>
-        <Button variant='success' onClick={nuevaTarea}  >Nueva Tarea</Button>
+        <Button variant='success' onClick={nuevaTarea} >Nueva Tarea</Button>
       </Form>
     </div>
   )
